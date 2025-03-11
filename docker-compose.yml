@@ -1,0 +1,21 @@
+services:
+  ros_jazzy_container:
+    build: .
+    image: ros_jazzy:latest 
+    container_name: ros_jazzy_container
+    network_mode: "host"
+    volumes:
+      - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      
+    
+    environment:
+    - DISPLAY=${DISPLAY}
+    - QT_X11_NO_MITSHM=1
+        
+    privileged: true
+
+    entrypoint: ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.bash && service ssh start && tail -f /dev/null"]
+
+
