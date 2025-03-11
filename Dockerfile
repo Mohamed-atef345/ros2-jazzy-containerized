@@ -27,12 +27,11 @@ RUN apt-get update && apt-get install -y ros-dev-tools\
     && apt-get upgrade -y\
     && apt-get install -y ros-jazzy-desktop\
     && rm -rf /var/lib/apt/lists/*
-    RUN useradd -m --shell /bin/bash ros_jazzy && usermod -aG sudo ros_jazzy
-    RUN echo "ros_jazzy:123456" | chpasswd &&\
-    echo "root:123456" | chpasswd
-    USER ros_jazzy
+    
+RUN useradd -m --shell /bin/bash ros_jazzy && usermod -aG sudo ros_jazzy
+USER ros_jazzy
 
-    WORKDIR /home/ros_jazzy
+WORKDIR /home/ros_jazzy
 
 
 
